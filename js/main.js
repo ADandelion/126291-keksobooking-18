@@ -63,7 +63,7 @@ var getAllSimilarAds = function (fnRandomInteger, fnRandomArrayLength, fnRandomI
         'checkout': fnRandomInteger(TIME_CHECKOUT),
         'features': fnRandomArrayLength(HOUSE_FEATURES),
         'description': 'Красивый дом у моря',
-        'photos': fnRandomArrayLength(HOUSE_PHOTO )
+        'photos': fnRandomArrayLength(HOUSE_PHOTO)
       },
       'location': {
         'x': fnRandomIntegerRange(130, 630),
@@ -84,7 +84,7 @@ var renderMarks = function (mark) {
   markElement.style.left = '' + (mark.location.x) + 'px';
   markElement.style.top = '' + (mark.location.x) + 'px';
   markElement.querySelector('img').src = mark.author.avatar;
-  markElement.querySelector('img').alt =  mark.offer.tittle;
+  markElement.querySelector('img').alt = mark.offer.tittle;
 
   return markElement;
 };
