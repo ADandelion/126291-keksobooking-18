@@ -5,17 +5,12 @@ var TYPE_OF_HOUSING = ['palace', 'flat', 'house', 'bungalo'];
 var TIME_CHECKIN = ['12:00', '13:00', '14:00'];
 var TIME_CHECKOUT = ['12:00', '13:00', '14:00'];
 var HOUSE_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-var ADS_PHOTO = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg',
-                 'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
-                 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
-var HOUSE_PHOTO = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg',
-                   'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
-                   'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
+var HOUSE_PHOTO = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 
 var advertisments = [];
 
 
-var mapFilters = document.querySelector('.map').classList.remove('map--faded');
+document.querySelector('.map').classList.remove('map--faded');
 
 var markLists = document.querySelector('.map__pins');
 var markTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
@@ -54,25 +49,25 @@ var randomArrayLength = function (arrLength) {
 var getAllSimilarAds = function (fnRandomInteger, fnRandomArrayLength, fnRandomIntegerRange) {
   for (var j = 0; j < NUMBER_ADS; j++) {
     advertisments.push({
-      "author":{
-        "avatar": 'img/avatars/user0' + (j + 1) + '.png'
+      'author': {
+        'avatar': 'img/avatars/user0' + (j + 1) + '.png'
       },
-      "offer": {
-        "tittle": 'Сдаю хату',
-        "address": '600, 300',
-        "price": '150',
-        "type": fnRandomInteger(TYPE_OF_HOUSING),
-        "rooms": '3',
-        "guests": '2',
-        "checkin": fnRandomInteger(TIME_CHECKIN),
-        "checkout": fnRandomInteger(TIME_CHECKOUT),
-        "features": fnRandomArrayLength(HOUSE_FEATURES),
-        "description": 'Красивый дом у моря',
-        "photos": fnRandomArrayLength(HOUSE_PHOTO )
+      'offer': {
+        'tittle': 'Сдаю хату',
+        'address': '600, 300',
+        'price': '150',
+        'type': fnRandomInteger(TYPE_OF_HOUSING),
+        'rooms': '3',
+        'guests': '2',
+        'checkin': fnRandomInteger(TIME_CHECKIN),
+        'checkout': fnRandomInteger(TIME_CHECKOUT),
+        'features': fnRandomArrayLength(HOUSE_FEATURES),
+        'description': 'Красивый дом у моря',
+        'photos': fnRandomArrayLength(HOUSE_PHOTO )
       },
-      "location": {
-        "x": fnRandomIntegerRange(130, 630),
-        "y": fnRandomIntegerRange(130, 630)
+      'location': {
+        'x': fnRandomIntegerRange(130, 630),
+        'y': fnRandomIntegerRange(130, 630)
       }
     });
   }
