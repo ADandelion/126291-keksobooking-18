@@ -33,7 +33,7 @@ function randomIntegerRange(min, max) {
   max = Math.floor(max);
 
   return Math.floor(Math.random() * (max - min + 1)) + min;
-};
+}
 
 // Случайное кол-во строк из массива
 var randomArrayLength = function (arrLength) {
