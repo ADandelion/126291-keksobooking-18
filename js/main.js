@@ -59,7 +59,7 @@ var getAllSimilarAds = function (obj) {
         'price': randomIntegerRange(10000, 50000),
         'type': getRandomIntegerInArray(TYPE_OF_HOUSING),
         'rooms': randomIntegerRange(1, 3),
-        'guests':randomIntegerRange(1, 5),
+        'guests': randomIntegerRange(1, 5),
         'checkin': getRandomIntegerInArray(TIME_CHECKIN),
         'checkout': getRandomIntegerInArray(TIME_CHECKOUT),
         'features': randomArrayLength(HOUSE_FEATURES),
