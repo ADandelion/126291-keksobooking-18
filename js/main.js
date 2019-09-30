@@ -79,16 +79,16 @@ var getAllSimilarAds = function (obj) {
 getAllSimilarAds(advertisments);
 
 // Рендер марок на карте
-var renderMarks = function (mark) {
-  var markElement = markTemplate.cloneNode(true);
+// var renderMarks = function (mark) {
+//   var markElement = markTemplate.cloneNode(true);
 
-  markElement.style.left = '' + (mark.location.x - 25) + 'px';
-  markElement.style.top = '' + (mark.location.y - 70) + 'px';
-  markElement.querySelector('img').src = mark.author.avatar;
-  markElement.querySelector('img').alt = mark.offer.tittle;
+//   markElement.style.left = '' + (mark.location.x - 25) + 'px';
+//   markElement.style.top = '' + (mark.location.y - 70) + 'px';
+//   markElement.querySelector('img').src = mark.author.avatar;
+//   markElement.querySelector('img').alt = mark.offer.tittle;
 
-  return markElement;
-};
+//   return markElement;
+// };
 
 // Создаем DOM элементы
 // var addMarksList = function (marksList, marksArr) {
@@ -129,10 +129,11 @@ var setAllFieldsetDisable = function () {
 
 // Задает карте класс .map--faded
 var changeStateMap = function () {
-  return  document.querySelector('.map').classList.add('map--faded');
+return  document.querySelector('.map').classList.add('map--faded');
 };
 
 // Задает карте статус .map--faded и всем полям Fieldset внутри клаccа .ad-form атрибут disabled
+
 document.addEventListener('DOMContentLoaded', inactivePageStateHandler);
 
 // Событий при нажатии на Главную метку
