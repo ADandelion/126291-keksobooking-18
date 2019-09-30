@@ -11,7 +11,7 @@ var HOUSE_PHOTO = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http:/
 var advertisments = [];
 
 
-document.querySelector('.map').classList.remove('map--faded');
+// document.querySelector('.map').classList.remove('map--faded');
 
 var markLists = document.querySelector('.map__pins');
 var markTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
@@ -100,6 +100,41 @@ var addMarksList = function (marksList, marksArr) {
   return marksList.appendChild(fragment);
 };
 
+// addMarksList(markLists, advertisments);
 
-addMarksList(markLists, advertisments);
 
+
+// НЕАКТИВНОЕ И АКТИВНОЕ СОСТОЯНИЕ (MODULE4-TASK2)
+
+var mainPin = document.querySelector('.map__pin--main');
+
+
+var inactivePageStateHandler = function () {
+  setAllFieldsetDisable();
+  changeStateMap();
+};
+
+var activePageStateHandler = function () {
+  document.removeEventListener('DOMContentLoaded', inactivePageStateHandler);
+};
+
+// Задает всем тэгам Fieldset атрибут disabled
+var setAllFieldsetDisable = function () {
+  var allFieldset = document.querySelectorAll('.ad-form fieldset');
+  for (var i = 0; i < allFieldset.length; i++) {
+    allFieldset[i].setAttribute('disabled', 'disabled');
+  }
+
+  return allFieldset;
+};
+
+// Задает карте класс .map--faded
+var changeStateMap = function () {
+  return  document.querySelector('.map').classList.add('map--faded');
+};
+
+// Задает карте статус .map--faded и всем полям Fieldset внутри клаccа .ad-form атрибут disabled
+document.addEventListener('DOMContentLoaded', inactivePageStateHandler);
+
+// Событий при нажатии на Главную метку
+ mainPin.addEventListener('mousedown', activePageStateHandler);
