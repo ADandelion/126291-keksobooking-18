@@ -13,7 +13,7 @@ var advertisments = [];
 
 // document.querySelector('.map').classList.remove('map--faded');
 
-var markLists = document.querySelector('.map__pins');
+// var markLists = document.querySelector('.map__pins');
 var markTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 var mapWidth = document.querySelector('.map').offsetWidth;
 
@@ -91,17 +91,16 @@ var renderMarks = function (mark) {
 };
 
 // Создаем DOM элементы
-var addMarksList = function (marksList, marksArr) {
-  var fragment = document.createDocumentFragment();
-  for (var i = 0; i < NUMBER_ADS; i++) {
-    fragment.appendChild(renderMarks(marksArr[i]));
-  }
+// var addMarksList = function (marksList, marksArr) {
+//   var fragment = document.createDocumentFragment();
+//   for (var i = 0; i < NUMBER_ADS; i++) {
+//     fragment.appendChild(renderMarks(marksArr[i]));
+//   }
 
-  return marksList.appendChild(fragment);
-};
+//   return marksList.appendChild(fragment);
+// };
 
 // addMarksList(markLists, advertisments);
-
 
 
 // НЕАКТИВНОЕ И АКТИВНОЕ СОСТОЯНИЕ (MODULE4-TASK2)
@@ -137,4 +136,4 @@ var changeStateMap = function () {
 document.addEventListener('DOMContentLoaded', inactivePageStateHandler);
 
 // Событий при нажатии на Главную метку
- mainPin.addEventListener('mousedown', activePageStateHandler);
+mainPin.addEventListener('mousedown', activePageStateHandler);
