@@ -106,8 +106,6 @@ var KEYCODES = {
 var mainPin = document.querySelector('.map__pin--main');
 var map = document.querySelector('.map');
 var adsForm = document.querySelector('.ad-form');
-var x = 0;
-var y = 0;
 
 
 var pressEnterActivePage = function (evt) {
@@ -130,6 +128,7 @@ var activePageStateHandler = function () {
   removeAllFieldsetDisable();
   removeClassAdsFormDisabled();
   addMarksList(markLists, advertisments);
+
 
 };
 
