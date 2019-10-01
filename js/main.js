@@ -108,8 +108,7 @@ var map = document.querySelector('.map');
 var adsForm = document.querySelector('.ad-form');
 var x = 0;
 var y = 0;
-console.log(x);
-console.log(y);
+
 
 var pressEnterActivePage = function (evt) {
   if (evt.keyCode === KEYCODES.ENTER) {
@@ -132,11 +131,6 @@ var activePageStateHandler = function () {
   removeClassAdsFormDisabled();
   addMarksList(markLists, advertisments);
 
-//   map.addEventListener('mousemove', function (event) {
-//      x = event.clientX;
-//      y = event.clientY;
-
-//  });
 };
 
 // Задает всем тэгам Fieldset атрибут disabled
@@ -172,7 +166,7 @@ var removeClassMapFaded = function () {
 
 
 // Добавляет у формы объявления класс .ad-form--disabled
-var addClassAdsFormDisabled= function () {
+var addClassAdsFormDisabled = function () {
   return adsForm.classList.add('ad-form--disabled');
 };
 
