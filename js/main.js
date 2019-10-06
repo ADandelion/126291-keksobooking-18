@@ -103,15 +103,15 @@ var KEYCODES = {
   'ENTER': 13
 };
 
-var DEFAULT_COORDINATES = [570,375];
+var DEFAULT_COORDINATES = [570, 375];
 
 var mainPin = document.querySelector('.map__pin--main');
 var map = document.querySelector('.map');
 var addressInput = document.getElementById('address');
-var adForm = document.querySelector('.ad-form')
+var adForm = document.querySelector('.ad-form');
 var fieldCapacity = adForm.querySelector('#capacity');
 var fieldRoom = adForm.querySelector('#room_number');
-var mapFilters = document.querySelector('.map__filters');
+// var mapFilters = document.querySelector('.map__filters');
 
 
 var pressEnterActivePage = function (evt) {
@@ -123,9 +123,9 @@ var pressEnterActivePage = function (evt) {
 };
 
 var inactivePageStateHandler = function () {
-  // addAllFieldsetDisable();
-  // addClassMapFaded();
-  // addClassAdsFormDisabled();
+  addAllFieldsetDisable();
+  addClassMapFaded();
+  addClassAdsFormDisabled();
   addressInput.value = DEFAULT_COORDINATES;
 };
 
@@ -133,7 +133,7 @@ var activePageStateHandler = function () {
   document.removeEventListener('DOMContentLoaded', inactivePageStateHandler);
   removeClassMapFaded();
   removeAllFieldsetDisable();
-  // removeClassAdsFormDisabled();
+  removeClassAdsFormDisabled();
   addMarksList(markLists, advertisments);
 
   map.addEventListener('mousemove', function (event) {
@@ -187,28 +187,22 @@ var removeClassAdsFormDisabled = function () {
 var compareFieldsRoomCapacityHandler = function () {
   var theTarget = event.target;
 
-  console.log(theTarget.selectedIndex);
-
   if (theTarget.name === 'rooms') {
     if (theTarget.value === '100' && fieldCapacity.value !== '0') {
-      console.log('ошибка2');
       theTarget.setCustomValidity('Для 100 комнат выберите опцию "Не для гостей"');
     } else if (theTarget.value < fieldCapacity.value) {
-      console.log('ошибка');
       theTarget.setCustomValidity('Кол-во комнат не может быть меньше кол-ва гостей');
     } else {
       theTarget.setCustomValidity('');
     }
   } else if (theTarget.name === 'capacity') {
-      if (theTarget.value === '0' && fieldRoom.value !== '100') {
-        console.log('ошибка3');
-        theTarget.setCustomValidity('Для "Не для гостей"  выберите опцию 100');
-      } else if (theTarget.value > fieldRoom.value) {
-        console.log('ошибка4');
-        theTarget.setCustomValidity('Кол-во гостей не может быть больше кол-ва комнат');
-      } else {
-        theTarget.setCustomValidity('');
-      }
+    if (theTarget.value === '0' && fieldRoom.value !== '100') {
+      theTarget.setCustomValidity('Для "Не для гостей"  выберите опцию 100');
+    } else if (theTarget.value > fieldRoom.value) {
+      theTarget.setCustomValidity('Кол-во гостей не может быть больше кол-ва комнат');
+    } else {
+      theTarget.setCustomValidity('');
+    }
   }
 };
 
@@ -225,9 +219,7 @@ document.addEventListener('keydown', pressEnterActivePage);
 mainPin.addEventListener('mousedown', activePageStateHandler);
 
 
-adForm.addEventListener('change', function () {
-  console.log(compareFieldsRoomCapacityHandler());
-});
+adForm.addEventListener('change',compareFieldsRoomCapacityHandler);
 
 
 
