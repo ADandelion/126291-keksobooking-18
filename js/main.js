@@ -108,7 +108,7 @@ var DEFAULT_COORDINATES = [570, 375];
 var mainPin = document.querySelector('.map__pin--main');
 var map = document.querySelector('.map');
 var addressInput = document.getElementById('address');
-var adForm = document.querySelector('.ad-form');
+var adsForm = document.querySelector('.ad-form');
 var fieldCapacity = adForm.querySelector('#capacity');
 var fieldRoom = adForm.querySelector('#room_number');
 // var mapFilters = document.querySelector('.map__filters');
@@ -219,9 +219,4 @@ document.addEventListener('keydown', pressEnterActivePage);
 mainPin.addEventListener('mousedown', activePageStateHandler);
 
 
-adForm.addEventListener('change',compareFieldsRoomCapacityHandler);
-
-
-
-
-
+adForm.addEventListener('change', compareFieldsRoomCapacityHandler);
