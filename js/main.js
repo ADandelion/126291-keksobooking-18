@@ -109,7 +109,7 @@ var mainPin = document.querySelector('.map__pin--main');
 var map = document.querySelector('.map');
 var addressInput = document.getElementById('address');
 var adsForm = document.querySelector('.ad-form');
-var fieldCapacity = adForm.querySelector('#capacity');
+var fieldCapacity = adsForm.querySelector('#capacity');
 var fieldRoom = adsForm.querySelector('#room_number');
 // var mapFilters = document.querySelector('.map__filters');
 
