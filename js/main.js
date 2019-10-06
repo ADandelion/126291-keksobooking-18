@@ -110,7 +110,7 @@ var map = document.querySelector('.map');
 var addressInput = document.getElementById('address');
 var adsForm = document.querySelector('.ad-form');
 var fieldCapacity = adForm.querySelector('#capacity');
-var fieldRoom = adForm.querySelector('#room_number');
+var fieldRoom = adsForm.querySelector('#room_number');
 // var mapFilters = document.querySelector('.map__filters');
 
 
@@ -219,4 +219,4 @@ document.addEventListener('keydown', pressEnterActivePage);
 mainPin.addEventListener('mousedown', activePageStateHandler);
 
 
-adForm.addEventListener('change', compareFieldsRoomCapacityHandler);
+adsForm.addEventListener('change', compareFieldsRoomCapacityHandler);
