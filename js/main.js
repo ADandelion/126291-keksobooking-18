@@ -123,9 +123,9 @@ var pressEnterActivePage = function (evt) {
 };
 
 var inactivePageStateHandler = function () {
-  // addAllFieldsetDisable();
-  // addClassMapFaded();
-  // addClassAdsFormDisabled();
+  addAllFieldsetDisable();
+  addClassMapFaded();
+  addClassAdsFormDisabled();
   addressInput.value = DEFAULT_COORDINATES;
 };
 
@@ -189,7 +189,7 @@ var compareFieldsRoomCapacityHandler = function () {
     fieldCapacity.setCustomValidity('Кол-во комнат не может быть меньше кол-ва гостей');
   } else if (fieldRoom.value === '100' && fieldCapacity.value !== '0') {
     fieldRoom.setCustomValidity('Для 100 комнат выбрать опцию "Не для гостей"');
-  } else if (fieldRoom.value !== '100' && fieldCapacity.value == '0') {
+  } else if (fieldRoom.value !== '100' && fieldCapacity.value === '0') {
     fieldCapacity.setCustomValidity('Для опцию "Не для гостей" выбрать опцию "100 комнат"');
   } else {
     fieldCapacity.setCustomValidity('');
