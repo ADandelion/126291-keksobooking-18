@@ -123,9 +123,9 @@ var pressEnterActivePage = function (evt) {
 };
 
 var inactivePageStateHandler = function () {
-  addAllFieldsetDisable();
-  addClassMapFaded();
-  addClassAdsFormDisabled();
+  // addAllFieldsetDisable();
+  // addClassMapFaded();
+  // addClassAdsFormDisabled();
   addressInput.value = DEFAULT_COORDINATES;
 };
 
@@ -185,24 +185,15 @@ var removeClassAdsFormDisabled = function () {
 };
 
 var compareFieldsRoomCapacityHandler = function () {
-  var theTarget = event.target;
-
-  if (theTarget.name === 'rooms') {
-    if (theTarget.value === '100' && fieldCapacity.value !== '0') {
-      theTarget.setCustomValidity('Для 100 комнат выберите опцию "Не для гостей"');
-    } else if (theTarget.value < fieldCapacity.value) {
-      theTarget.setCustomValidity('Кол-во комнат не может быть меньше кол-ва гостей');
-    } else {
-      theTarget.setCustomValidity('');
-    }
-  } else if (theTarget.name === 'capacity') {
-    if (theTarget.value === '0' && fieldRoom.value !== '100') {
-      theTarget.setCustomValidity('Для "Не для гостей"  выберите опцию 100');
-    } else if (theTarget.value > fieldRoom.value) {
-      theTarget.setCustomValidity('Кол-во гостей не может быть больше кол-ва комнат');
-    } else {
-      theTarget.setCustomValidity('');
-    }
+  if (fieldRoom.value < fieldCapacity.value) {
+    fieldCapacity.setCustomValidity('Кол-во комнат не может быть меньше кол-ва гостей');
+  } else if (fieldRoom.value === '100' && fieldCapacity.value !== '0') {
+    fieldRoom.setCustomValidity('Для 100 комнат выбрать опцию "Не для гостей"');
+  } else if (fieldRoom.value !== '100' && fieldCapacity.value == '0') {
+    fieldCapacity.setCustomValidity('Для опцию "Не для гостей" выбрать опцию "100 комнат"');
+  } else {
+    fieldCapacity.setCustomValidity('');
+    fieldRoom.setCustomValidity('');
   }
 };
 
@@ -218,5 +209,5 @@ document.addEventListener('keydown', pressEnterActivePage);
 // Событий при нажатии на Главную метку
 mainPin.addEventListener('mousedown', activePageStateHandler);
 
-
+// Валидация полей Комнаты и Гостей
 adsForm.addEventListener('change', compareFieldsRoomCapacityHandler);
