@@ -184,16 +184,16 @@ var removeClassAdsFormDisabled = function () {
   return adsForm.classList.remove('ad-form--disabled');
 };
 
-var compareFieldsRoomCapacityHandler = function () {
-  if (fieldRoom.value < fieldCapacity.value) {
-    fieldCapacity.setCustomValidity('Кол-во комнат не может быть меньше кол-ва гостей');
-  } else if (fieldRoom.value === '100' && fieldCapacity.value !== '0') {
-    fieldRoom.setCustomValidity('Для 100 комнат выбрать опцию "Не для гостей"');
+var compareFieldsRoomCapacityHandler = function (target) {
+  fieldRoom.setCustomValidity('');
+  fieldCapacity.setCustomValidity('');
+
+ if (fieldCapacity.value !== '0' && fieldRoom.value === '100') {
+    target.setCustomValidity('Для 100 комнат выбрать опцию "Не для гостей"');
   } else if (fieldRoom.value !== '100' && fieldCapacity.value === '0') {
-    fieldCapacity.setCustomValidity('Для опцию "Не для гостей" выбрать опцию "100 комнат"');
-  } else {
-    fieldCapacity.setCustomValidity('');
-    fieldRoom.setCustomValidity('');
+    target.setCustomValidity('Для опцию "Не для гостей" выбрать опцию "100 комнат"');
+  } else if (fieldRoom.value < fieldCapacity.value) {
+    target.setCustomValidity('Кол-во гостей не может быть больше кол-ва комнат');
   }
 };
 
@@ -209,5 +209,11 @@ document.addEventListener('keydown', pressEnterActivePage);
 // Событий при нажатии на Главную метку
 mainPin.addEventListener('mousedown', activePageStateHandler);
 
+
 // Валидация полей Комнаты и Гостей
-adsForm.addEventListener('change', compareFieldsRoomCapacityHandler);
+adsForm.addEventListener('change', function () {
+  var theTarget = event.target;
+  compareFieldsRoomCapacityHandler(theTarget);
+});
+
+// adsForm.addEventListener('change', compareFieldsRoomCapacityHandler)
