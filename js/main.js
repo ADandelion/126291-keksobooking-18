@@ -188,13 +188,13 @@ var compareFieldsRoomCapacityHandler = function (target) {
   fieldRoom.setCustomValidity('');
   fieldCapacity.setCustomValidity('');
 
- if (fieldCapacity.value !== '0' && fieldRoom.value === '100') {
-    target.setCustomValidity('Для 100 комнат выбрать опцию "Не для гостей"');
-  } else if (fieldRoom.value !== '100' && fieldCapacity.value === '0') {
-    target.setCustomValidity('Для опцию "Не для гостей" выбрать опцию "100 комнат"');
-  } else if (fieldRoom.value < fieldCapacity.value) {
-    target.setCustomValidity('Кол-во гостей не может быть больше кол-ва комнат');
-  }
+  if (fieldCapacity.value !== '0' && fieldRoom.value === '100') {
+      target.setCustomValidity('Для 100 комнат выбрать опцию "Не для гостей"');
+    } else if (fieldRoom.value !== '100' && fieldCapacity.value === '0') {
+      target.setCustomValidity('Для опцию "Не для гостей" выбрать опцию "100 комнат"');
+    } else if (fieldRoom.value < fieldCapacity.value) {
+      target.setCustomValidity('Кол-во гостей не может быть больше кол-ва комнат');
+    }
 };
 
 
