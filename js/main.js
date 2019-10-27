@@ -107,7 +107,7 @@ var addMarksList = function (marksList, marksArr) {
 
 
 // Рендер информации об объявлениях на карте
-var renderInfoMarks = function (markInfoObj, markId) {
+var renderInfoMarks = function (markInfoObj) {
   var markInfoElement = markInfoTemplate.cloneNode(true);
   var closeInfoPopCard = markInfoElement.querySelector('.popup__close');
 
@@ -166,15 +166,15 @@ var addMarksInfoList = function (marksInfoList, marksArr, index) {
 
 // НЕАКТИВНОЕ И АКТИВНОЕ СОСТОЯНИЕ (MODULE4-TASK2)
 var DEFAULT_COORDINATES = [570, 375];
-var LENGTH_TITLE = {
-  'MIN': 30,
-  'MAX': 100
-};
+// var LENGTH_TITLE = {
+//   'MIN': 30,
+//   'MAX': 100
+// };
 
 var mainPin = document.querySelector('.map__pin--main');
 var mapPins = document.querySelector('.map__pins');
 var map = document.querySelector('.map');
-var mapOverlay = document.querySelector('.map__overlay');
+// var mapOverlay = document.querySelector('.map__overlay');
 var addressInput = document.getElementById('address');
 var adsForm = document.querySelector('.ad-form');
 var fieldCapacity = adsForm.querySelector('#capacity');
@@ -266,14 +266,14 @@ var compareFieldsRoomCapacityHandler = function (target) {
 };
 
 // Валидация поля TIITLE
-var fieldTitleValidityHandler = function (event) {
+var fieldTitleValidityHandler = function () {
   fieldTitle.setCustomValidity('');
 
   if (fieldTitle.value.length < 30) {
     fieldTitle.setCustomValidity('Сука! мало бУКАВ');
   } else if (fieldTitle.value.length > 100) {
     fieldTitle.setCustomValidity('Сука! МНОГО бУКАВ');
-  } else if (!fieldTitle.value ) {
+  } else if (!fieldTitle.value) {
     fieldTitle.setCustomValidity('Сука!');
   }
 };
