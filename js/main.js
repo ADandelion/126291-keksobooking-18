@@ -1,5 +1,9 @@
 'use strict';
 
+var KEYCODES = {
+  'ENTER': 13,
+  'ESC': 27
+};
 var NUMBER_ADS = 8;
 var TYPE_OF_HOUSING = ['palace', 'flat', 'house', 'bungalo'];
 var TIME_CHECKIN = ['12:00', '13:00', '14:00'];
@@ -12,6 +16,7 @@ var advertisments = [];
 
 var markLists = document.querySelector('.map__pins');
 var markTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+var markInfoTemplate = document.querySelector('#card').content.querySelector('.map__card');
 var mapWidth = document.querySelector('.map').offsetWidth;
 
 // Возвращает случайный элемент из массива
@@ -66,7 +71,8 @@ var getAllSimilarAds = function (obj) {
       'location': {
         'x': randomIntegerRange(25, (mapWidth - 30)),
         'y': randomIntegerRange(130, 630)
-      }
+      },
+      'dataId': j
     });
   }
 
@@ -83,9 +89,11 @@ var renderMarks = function (mark) {
   markElement.style.top = '' + (mark.location.y - 70) + 'px';
   markElement.querySelector('img').src = mark.author.avatar;
   markElement.querySelector('img').alt = mark.offer.tittle;
+  markElement.setAttribute('data-id', mark.dataId);
 
   return markElement;
 };
+
 
 // Создаем DOM элементы
 var addMarksList = function (marksList, marksArr) {
@@ -98,27 +106,86 @@ var addMarksList = function (marksList, marksArr) {
 };
 
 
-// НЕАКТИВНОЕ И АКТИВНОЕ СОСТОЯНИЕ (MODULE4-TASK2)
-var KEYCODES = {
-  'ENTER': 13
+// Рендер информации об объявлениях на карте
+var renderInfoMarks = function (markInfoObj, markId) {
+  var markInfoElement = markInfoTemplate.cloneNode(true);
+  var closeInfoPopCard = markInfoElement.querySelector('.popup__close');
+
+  markInfoElement.querySelector('.popup__avatar').src = markInfoObj .author.avatar;
+  markInfoElement.querySelector('.popup__title').textContent = markInfoObj.offer.tittle;
+
+  closeInfoPopCard.addEventListener('click', function () {
+    markInfoElement.remove();
+  });
+
+  if (markInfoElement) {
+    document.addEventListener('keydown', function (evt) {
+      markInfoElement.focus();
+      pressEnterCloseInfoCardHandler(evt, markInfoElement);
+    });
+
+    document.addEventListener('keydown', function (evt) {
+      pressEscCloseInfoCardHandler(evt, markInfoElement);
+    });
+  } else {
+    window.removeEventListener('keydown', pressEscCloseInfoCardHandler);
+  }
+
+
+  return markInfoElement;
 };
 
+
+var pressEnterCloseInfoCardHandler = function (evt, card) {
+  if (evt.keyCode === KEYCODES.ENTER) {
+    closeCardInfo(card);
+
+  }
+};
+
+var pressEscCloseInfoCardHandler = function (evt, card) {
+  if (evt.keyCode === KEYCODES.ESC) {
+    closeCardInfo(card);
+  }
+
+};
+
+var closeCardInfo = function (cardElement) {
+  cardElement.remove();
+};
+
+
+// Создаем DOM элементы
+var addMarksInfoList = function (marksInfoList, marksArr, index) {
+  var fragment = document.createDocumentFragment();
+  fragment.appendChild(renderInfoMarks(marksArr[index]));
+
+  return marksInfoList.appendChild(fragment);
+};
+
+
+// НЕАКТИВНОЕ И АКТИВНОЕ СОСТОЯНИЕ (MODULE4-TASK2)
 var DEFAULT_COORDINATES = [570, 375];
+var LENGTH_TITLE = {
+  'MIN': 30,
+  'MAX': 100
+};
 
 var mainPin = document.querySelector('.map__pin--main');
+var mapPins = document.querySelector('.map__pins');
 var map = document.querySelector('.map');
+var mapOverlay = document.querySelector('.map__overlay');
 var addressInput = document.getElementById('address');
 var adsForm = document.querySelector('.ad-form');
 var fieldCapacity = adsForm.querySelector('#capacity');
 var fieldRoom = adsForm.querySelector('#room_number');
-// var mapFilters = document.querySelector('.map__filters');
+var fieldTitle = adsForm.querySelector('#title');
 
 
 var pressEnterActivePage = function (evt) {
   if (evt.keyCode === KEYCODES.ENTER) {
     activePageStateHandler();
     document.addEventListener('DOMContentLoaded', inactivePageStateHandler);
-
   }
 };
 
@@ -184,6 +251,7 @@ var removeClassAdsFormDisabled = function () {
   return adsForm.classList.remove('ad-form--disabled');
 };
 
+// Валидация полей ROOM и CAPACITY
 var compareFieldsRoomCapacityHandler = function (target) {
   fieldRoom.setCustomValidity('');
   fieldCapacity.setCustomValidity('');
@@ -194,6 +262,27 @@ var compareFieldsRoomCapacityHandler = function (target) {
     target.setCustomValidity('Для опцию "Не для гостей" выбрать опцию "100 комнат"');
   } else if (fieldRoom.value < fieldCapacity.value) {
     target.setCustomValidity('Кол-во гостей не может быть больше кол-ва комнат');
+  }
+};
+
+// Валидация поля TIITLE
+var fieldTitleValidityHandler = function (event) {
+  fieldTitle.setCustomValidity('');
+
+  if (fieldTitle.value.length < 30) {
+    fieldTitle.setCustomValidity('Сука! мало бУКАВ');
+  } else if (fieldTitle.value.length > 100) {
+    fieldTitle.setCustomValidity('Сука! МНОГО бУКАВ');
+  } else if (!fieldTitle.value ) {
+    fieldTitle.setCustomValidity('Сука!');
+  }
+};
+
+
+// Карточки объявлений (MODULE4-TASK2)
+var markDataId = function (targetMark, arrAdds) {
+  if (targetMark.parentElement.hasAttribute('data-id') && arrAdds.indexOf(targetMark.parentElement.hasAttribute('data-id'))) {
+    addMarksInfoList(markLists, arrAdds, targetMark.parentElement.getAttribute('data-id'));
   }
 };
 
@@ -216,4 +305,16 @@ adsForm.addEventListener('change', function () {
   compareFieldsRoomCapacityHandler(theTarget);
 });
 
-// adsForm.addEventListener('change', compareFieldsRoomCapacityHandler)
+
+// Валидация поля TITLE
+
+fieldTitle.addEventListener('input', function (event) {
+  fieldTitleValidityHandler(event);
+});
+
+
+// Открываем информация по объявлению
+mapPins.addEventListener('click', function (evt) {
+  var target = evt.target;
+  markDataId(target, advertisments);
+});
